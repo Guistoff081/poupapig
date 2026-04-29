@@ -57,6 +57,7 @@ export default defineNuxtConfig({
     types: "~/types/database.types.ts",
   },
   runtimeConfig: {
+    openrouterApiKey: process.env.OPENROUTER_API_KEY,
     public: {
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseKey: process.env.SUPABASE_KEY,

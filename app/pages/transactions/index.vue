@@ -95,6 +95,7 @@ const headers: TableHeaders[] = [
 ];
 
 const isOpen = ref(false);
+const isOpenImport = ref(false);
 const isOpenAlert = ref(false);
 const dialogId = ref<string | undefined>(undefined);
 const transactionSelected = ref<Transaction | null>(null);
@@ -240,6 +241,15 @@ async function afterTransactionSave() {
         </Button>
         <Button
           type="button"
+          variant="outline"
+          title="Importar transações"
+          @click="isOpenImport = true"
+          class="flex-1 sm:flex-none"
+        >
+          <Icon name="lucide:file-scan" />
+        </Button>
+        <Button
+          type="button"
           variant="default"
           @click="openDialog()"
           class="flex-1 sm:flex-none"
@@ -328,6 +338,14 @@ async function afterTransactionSave() {
       description="Preencha os dados da movimentação financeira."
       form="transaction"
       :form-props="{ id: dialogId }"
+      @submit="afterTransactionSave"
+    />
+
+    <shared-dialog
+      v-model="isOpenImport"
+      title="Importar transações"
+      description="Envie uma foto de recibo ou PDF de extrato. A IA extrai os lançamentos para você revisar."
+      form="importTransactions"
       @submit="afterTransactionSave"
     />
 
